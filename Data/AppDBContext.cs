@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyFirstBlazor.Models;
+using MyFirstBlazor.Models.Domain;
 
 namespace MyFirstBlazor.Data
 {
-    public class AppDBContext :DbContext
+    public class AppDbContext:DbContext
     {
-        public AppDBContext(DbContextOptions<AppDBContext> options):base(options) { }
-        
+        public AppDbContext(DbContextOptions<AppDbContext> options):base(options) { }
+
         public DbSet<Product> Products { get; set; }
     }
 }

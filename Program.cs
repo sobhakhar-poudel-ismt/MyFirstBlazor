@@ -14,14 +14,18 @@ namespace MyFirstBlazor
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
-            string? connString = builder.Configuration.GetConnectionString("DefaultConnection");
+        /*    string? connString = builder.Configuration.GetConnectionString("DefaultConnection");
       
             builder.Services.AddDbContext<AppDBContext>(options =>
                 options.UseMySql(connString,ServerVersion.AutoDetect(connString)
-            ));
+            ));*/
 
             //Initlaize Dependency Injection
-            builder.Services.AddSingleton<StudentService>();
+            builder.Services.AddSingleton<StudentService>();// Only one object
+            builder.Services.AddScoped<StudentService>(); //API DI -> one object -> Again API Request -> same object
+            builder.Services.AddTransient<StudentService>(); //Every API Request/Load Component -> new object
+
+
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -39,3 +43,9 @@ namespace MyFirstBlazor
         }
     }
 }
+
+
+dotnet add package Pomelo.EntityFrameworkCore.MySql --version 8.0.3
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.3
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.3 
+dotnet add package Microsoft.EntityFrameworkCore --version 8.0.3 

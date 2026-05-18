@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyFirstBlazor.Models
+namespace MyFirstBlazor.Models.Domain
 {
     [Table("products")] // Maps to MySQL table `product`
     public class Product
