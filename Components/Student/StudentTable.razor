@@ -1,0 +1,23 @@
+﻿@using MyFirstBlazor.Components.ViewModel
+
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+    </tr>
+    @foreach(Student student in Students)
+    {
+    <tr>
+        <td>@student.Name</td>
+        <td>@student.Email</td>
+        <td>@student.Age</td>
+    </tr>    
+    }
+
+</table>
+
+@code {
+    [Parameter]
+    public List<Student> Students { get; set; } = new List<Student>();
+}

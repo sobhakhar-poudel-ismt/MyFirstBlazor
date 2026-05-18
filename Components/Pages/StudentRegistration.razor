@@ -1,0 +1,56 @@
+﻿@page "/student-registration"
+@rendermode InteractiveServer
+@using MyFirstBlazor.Components.ViewModel
+@using MyFirstBlazor.Components.Student
+@using MyFirstBlazor.Services
+
+@inject StudentService studentService
+
+<label class="form-label">Student Name</label>
+<input @bind="formStudent.Name" class="form-control" type="text" placeholder="Enter Name" />
+
+<label class="form-label">Student Age</label>
+<input @bind="formStudent.Age" class="form-control" type="number" placeholder="Enter Age" />
+
+<label class="form-label">Student Email</label>
+<input @bind="formStudent.Email" class="form-control" type="email" placeholder="Enter Email" />
+
+<button class="btn btn-primary" @onclick="onRegistration">Register</button>
+<p>Testing</p>
+@formStudent.Name
+@studentService.Students.Count
+
+<StudentTable Students="studentService.Students" />
+@code {
+    string validationError = "";
+    Student formStudent = new Student();
+    void onRegistration()
+    {
+        studentService.AddStudent(formStudent);
+        formStudent = new Student();
+    }
+
+    protected override void OnInitialized()
+    {
+        //Database request-> Data access
+        Console.WriteLine("On Student Registartion OnInitialized");
+        base.OnInitialized();
+    }
+    //When Parameter is set/changed by Parent 
+    protected override void OnParametersSet()
+    {
+        //Paramter based query/functionality
+        Console.WriteLine("On Student Registartion OnParametersSet");
+        base.OnParametersSet();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        Console.WriteLine($"On Student Registartion OnAfterRender{firstRender}");
+    }
+    protected override bool ShouldRender()
+    {
+        return false;
+    }
+}

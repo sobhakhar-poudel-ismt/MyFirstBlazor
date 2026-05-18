@@ -1,0 +1,57 @@
+@using MyFirstBlazor.Components.ViewModel
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Product Form</h5>
+    </div>
+    <div class="card-body">
+        <EditForm Model="product" OnValidSubmit="SaveProduct">
+            <DataAnnotationsValidator />
+          
+            <div class="mb-3">
+                <label class="form-label">Product Name</label>
+                <InputText class="form-control" @bind-Value="product.Name" placeholder="Enter product name" />
+                <ValidationMessage For="@(() => product.Name)" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Category</label>
+                <InputText class="form-control" @bind-Value="product.Category" placeholder="Enter category" />
+                <ValidationMessage For="@(() => product.Category)" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Price</label>
+                <InputNumber class="form-control" @bind-Value="product.Price" placeholder="Enter price" />
+                <ValidationMessage For="@(() => product.Price)" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Stock</label>
+                <InputNumber class="form-control" @bind-Value="product.Stock" placeholder="Enter stock" />
+                <ValidationMessage For="@(() => product.Stock)" />
+            </div>
+
+            <div class="form-check mb-3">
+                <InputCheckbox class="form-check-input" @bind-Value="product.IsActive" />
+                <label class="form-check-label">Active</label>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Save Product</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback<ProductViewModel> OnProductSaved { get; set; }
+
+    private ProductViewModel product = new();
+
+    private async Task SaveProduct()
+    {
+        await OnProductSaved.InvokeAsync(product);
+
+        product = new ProductViewModel();
+    }
+}

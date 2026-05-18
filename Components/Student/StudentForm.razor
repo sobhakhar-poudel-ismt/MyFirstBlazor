@@ -1,0 +1,12 @@
+﻿<input @oninput="onChange" />
+<input @bind="bindValue" @bind:event="oninput" />
+<p>@currentValue</p>
+<p>Bind Value: @bindValue</p>
+@code {
+    string bindValue = "";
+    string currentValue = "";
+    void onChange(ChangeEventArgs e)
+    {
+        currentValue = e.Value.ToString();
+    }
+}

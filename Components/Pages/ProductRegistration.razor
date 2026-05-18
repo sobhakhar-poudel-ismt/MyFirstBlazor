@@ -1,0 +1,47 @@
+@page "/product-registration"
+@rendermode InteractiveServer
+@using Microsoft.EntityFrameworkCore
+@using MyFirstBlazor.Components.Product
+@using MyFirstBlazor.Components.ViewModel
+@using MyFirstBlazor.Data
+@using MyFirstBlazor.Models
+@inject AppDBContext DbContext
+
+<h3>Product Registration</h3>
+
+<div class="row g-3">
+    <div class="col-12 col-lg-5">
+        <ProductForm OnProductSaved="SaveProduct" />
+    </div>
+    <div class="col-12 col-lg-7">
+        <ProductTable Products="products" />
+    </div>
+</div>
+
+@code {
+    private List<ProductViewModel> products = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProducts();
+    }
+
+    private async Task LoadProducts()
+    {
+        List<Product> productModels = await DbContext.Products
+            .OrderByDescending(product => product.Id)
+            .ToListAsync();
+
+        products = productModels
+            .Select(product => new ProductViewModel(product))
+            .ToList();
+    }
+
+    private async Task SaveProduct(ProductViewModel productViewModel)
+    {
+        Product product = productViewModel.ToProduct();
+        DbContext.Products.Add(product);
+        await DbContext.SaveChangesAsync();
+        await LoadProducts();
+    }
+}

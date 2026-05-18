@@ -1,0 +1,31 @@
+﻿@page "/contact"
+@rendermode InteractiveServer
+
+<h3>Contact</h3>
+
+<p>My name is @name. My age is @age</p>
+
+<h2>@name</h2>
+<b>@sum</b>
+
+@if (percentage > 80)
+{
+    <p>Distinction</p>
+}
+else
+{
+    <p>Non-Distinction</p>
+}
+
+<br />
+<input @bind="name" @bind:event="oninput" type="text" />
+
+@code {
+    string name = "Sagar";
+    int age = 17;
+    string studentName = "Sagar Poudel";
+    int mathMarks = 80;
+    int scienceMarks = 50;
+    int sum => mathMarks + scienceMarks;
+    int percentage = 75;
+}

@@ -1,0 +1,12 @@
+﻿@page "/conditional"
+<h3>Conditional</h3>
+
+@if (isUserLoggedIn) { <b>Welcome!!</b>} else{ <button>Please Login</button>}
+@if(age > 18) {<h3>Adult</h3>} else { <h3>Minor</h3>}
+@if (inStock) {<button>Buy Now</button>} else{<p style="color:red">Out of Stock</p>}
+@code {
+    bool isUserLoggedIn = false;
+    int age = 17;
+    string name = "Ds";
+    bool inStock = true;
+}
