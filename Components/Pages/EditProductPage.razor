@@ -1,0 +1,9 @@
+﻿@page "/edit-product/{id:int}"
+@using MyFirstBlazor.Services
+
+@inject ProductRegistrationService productService
+
+@code{
+    [Parameter]
+    public int id { get; set; }
+}
