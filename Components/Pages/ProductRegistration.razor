@@ -1,0 +1,33 @@
+@page "/product-registration"
+@rendermode InteractiveServer
+@using MyFirstBlazor.Components.Product
+@using MyFirstBlazor.Models.Domain
+@using MyFirstBlazor.Models.ViewModel
+@using MyFirstBlazor.Services
+
+@inject ProductRegistrationService productRegistrationService
+@* OnProductSaved="OnProductSaved" *@
+<div class="row">
+    <div class="col-6"><ProductForm /></div>
+    <div class="col-6"><ProductTable Products="products" /></div>
+</div>
+
+@code {
+    private List<Product> products = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProductsAsync();
+    }
+
+    private async Task OnProductSaved(ProductViewModel product)
+    {
+        await productRegistrationService.AddProductAsync(product);
+        await LoadProductsAsync();
+    }
+
+    private async Task LoadProductsAsync()
+    {
+        products = await productRegistrationService.GetProductsAsync();
+    }
+}

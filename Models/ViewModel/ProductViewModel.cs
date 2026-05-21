@@ -1,16 +1,15 @@
+﻿using MyFirstBlazor.Models.Domain;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyFirstBlazor.Components.ViewModel
-{
+namespace MyFirstBlazor.Models.ViewModel {
     public class ProductViewModel
     {
         public ProductViewModel()
         {
         }
 
-        public ProductViewModel(MyFirstBlazor.Models.Product product)
+        public ProductViewModel(Product product)
         {
-            Id = product.Id;
             Name = product.Name;
             Price = product.Price;
             Category = product.Category;
@@ -18,9 +17,10 @@ namespace MyFirstBlazor.Components.ViewModel
             Stock = product.Stock;
         }
 
-        public int Id { get; set; }
+
 
         [Required]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "Must be between 2 and 100 characters")]
         public string Name { get; set; } = string.Empty;
 
         [Required]
@@ -34,11 +34,10 @@ namespace MyFirstBlazor.Components.ViewModel
         [Required]
         public int Stock { get; set; }
 
-        public MyFirstBlazor.Models.Product ToProduct()
+        public Product ToProduct()
         {
-            return new MyFirstBlazor.Models.Product
+            return new Product
             {
-                Id = Id,
                 Name = Name,
                 Price = Price,
                 Category = Category,
@@ -47,4 +46,6 @@ namespace MyFirstBlazor.Components.ViewModel
             };
         }
     }
+
 }
+
