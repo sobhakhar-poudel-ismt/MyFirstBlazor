@@ -28,8 +28,17 @@ namespace MyFirstBlazor.Services
         public async Task<Product?> GetByIdAsync(int id)
         {
             var product= await appDbContext.Products
-       .FirstOrDefaultAsync(product => product.Id == id);
+               .FirstOrDefaultAsync(product => product.Id == id);
             return product;
+        }
+
+        public async Task UpdateProductAsync(int id, ProductViewModel model)
+        {
+            /*var product = await appDbContext.Products.FindAsync(id);
+            if (product == null)
+                return;
+            model.UpdateDomain(product);
+            await appDbContext.SaveChangesAsync();*/
         }
     }
 }

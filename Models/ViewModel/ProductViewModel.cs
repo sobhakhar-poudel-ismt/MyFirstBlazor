@@ -45,6 +45,15 @@ namespace MyFirstBlazor.Models.ViewModel {
                 Stock = Stock
             };
         }
+
+        public void UpdateDomain(Product product)
+        {
+            product.Name = Name;
+            product.Price = Price;
+            product.Category = Category;
+            product.IsActive = IsActive;
+            product.Stock = Stock;
+        }
     }
 
 }
